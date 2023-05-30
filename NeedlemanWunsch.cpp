@@ -120,11 +120,12 @@ void NeedlemanWunsch::viewScoreMatrix() {
 
     int n = -1;
     for (const auto &column: scoreMatrix) {
-        std::cout << std::format("  {}  ", (n++) == -1 ? ' ' : subject[n]);
+        std::cout << std::format("  {}  ", n == -1 ? ' ' : subject[n]);
         for (const auto &row: column) {
             std::cout << std::format(" {:>3} ", row.score);
         }
         std::cout << "\n";
+        ++n;
     }
 }
 
