@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <format>
 
 class NeedlemanWunsch {
 private:
@@ -93,28 +94,28 @@ public:
     }
 
     void printScoreMatrix() {
-        printf("          ");
+        std::cout << "          ";
         for (const auto &n: query) {
-            printf("  %c  ", n);
+            std::cout << std::format("  {}  ", n);
         }
-        printf("\n");
+        std::cout << "\n";
         int n = -1;
         for (const auto &column: scoreMatrix) {
-            printf(n == -1 ? "     " : "  %c  ", subject[n]);
+            std::cout << std::format("  {}  ", n == -1 ? ' ' : subject[n]);
             for (const auto &row: column) {
-                printf(" %-3d ", row.score);
+                std::cout << std::format(" {:>3} ", row.score);
             }
-            printf("\n");
+            std::cout << "\n";
             ++n;
         }
     }
 
     void printBestAlignment() {
-        std::cout << alignedSubject << '\n';
+        std::cout << alignedSubject << "\n";
         for (size_t c = 0; c < alignedSubject.length() - 1; ++c) {
             std::cout << (alignedSubject[c] == alignedQuery[c] ? '|' : ' ');
         }
-        std::cout << '\n' << alignedQuery << std::endl;
+        std::cout << "\n" << alignedQuery << std::endl;
     }
 
     [[nodiscard]] std::string getSubject() const {
